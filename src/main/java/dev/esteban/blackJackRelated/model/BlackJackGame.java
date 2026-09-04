@@ -9,8 +9,8 @@ import java.util.List;
 public class BlackJackGame
 {
     private Mazo deck;
-    private ArrayList<Hand> playerHands;
-    private ArrayList<Boolean> playerStood;
+    private List<Hand> playerHands;
+    private List<Boolean> playerStood;
     private Hand dealerHand;
     private boolean dealerStood;
     private int numberOfPlayers;
@@ -24,18 +24,18 @@ public class BlackJackGame
         dealerHand = new Hand();
         dealerStood = false;
 
-        for (int i = 0; i < numberOfPlayers; i ++)
+        for (int i = 0; i < numberOfPlayers; i++)
         {
             playerHands.add(new Hand());
             playerStood.add(false);
         }
 
-        for (int i = 0; i < numberOfPlayers; i ++)
+        for (int i = 0; i < numberOfPlayers; i++)
         {
             dealCard(playerHands.get(i), true);
         }
         dealCard(dealerHand, false);
-        for (int i = 0; i < numberOfPlayers; i ++)
+        for (int i = 0; i < numberOfPlayers; i++)
         {
             dealCard(playerHands.get(i), true);
         }
@@ -63,7 +63,7 @@ public class BlackJackGame
 
     public boolean allPlayersFinished()
     {
-        for (int i = 0; i < numberOfPlayers; i ++)
+        for (int i = 0; i < numberOfPlayers; i++)
         {
             if (!isPlayerFinished(i))
             {
@@ -73,20 +73,19 @@ public class BlackJackGame
         return true;
     }
 
-    public void dealerAutoPlay()
+    public boolean dealerAutoPlay()
     {
         if (isDealerFinished())
         {
-            return;
+            return false;
         }
         if (dealerHand.getTotalValue() <= 16)
         {
             dealCard(dealerHand, true);
+            return true;
         }
-        else
-        {
-            dealerStood = true;
-        }
+        dealerStood = true;
+        return false;
     }
 
     public boolean isDealerFinished()
