@@ -1,4 +1,4 @@
-package dev.esteban.main;
+package dev.esteban.solitarieRelated.main;
 
 import javafx.application.Application;
 

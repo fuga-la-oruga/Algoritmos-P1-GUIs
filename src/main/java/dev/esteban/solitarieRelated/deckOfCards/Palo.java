@@ -1,4 +1,4 @@
-package dev.esteban.deckOfCards;
+package dev.esteban.solitarieRelated.deckOfCards;
 /**
  * Palos de cartas de una baraja inglesa.
  *
@@ -6,10 +6,10 @@ package dev.esteban.deckOfCards;
  * @version (2025-1)
  */
 public enum Palo {
-    TREBOL(1,"♣\uFE0E","negro"),
-    DIAMANTE(2,"♦\uFE0F","rojo"),
-    CORAZON(3,"❤\uFE0F","rojo"),
-    PICA(4,"♠\uFE0F","negro");
+    TREBOL(1,"T","negro"),
+    DIAMANTE(2,"D","rojo"),
+    CORAZON(3,"C","rojo"),
+    PICA(4,"P","negro");
 
     private final int peso;
     private final String figura;

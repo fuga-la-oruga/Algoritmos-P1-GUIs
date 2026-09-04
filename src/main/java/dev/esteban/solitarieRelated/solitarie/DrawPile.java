@@ -1,7 +1,7 @@
-package dev.esteban.solitarie;
+package dev.esteban.solitarieRelated.solitarie;
 
-import dev.esteban.deckOfCards.CartaInglesa;
-import dev.esteban.deckOfCards.Mazo;
+import dev.esteban.solitarieRelated.deckOfCards.CartaInglesa;
+import dev.esteban.solitarieRelated.deckOfCards.Mazo;
 
 import java.util.ArrayList;
 

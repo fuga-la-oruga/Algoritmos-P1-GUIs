@@ -1,4 +1,4 @@
-package dev.esteban.misc;
+package dev.esteban.solitarieRelated.misc;
 
 public class SolitaireTests
 {

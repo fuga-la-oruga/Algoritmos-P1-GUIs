@@ -1,8 +1,8 @@
-module dev.esteban.main {
+module dev.esteban.solitarieRelated.main {
     requires javafx.controls;
     requires javafx.fxml;
 
 
-    opens dev.esteban.main to javafx.fxml;
-    exports dev.esteban.main;
+    opens dev.esteban.solitarieRelated.main to javafx.fxml;
+    exports dev.esteban.solitarieRelated.main;
 }

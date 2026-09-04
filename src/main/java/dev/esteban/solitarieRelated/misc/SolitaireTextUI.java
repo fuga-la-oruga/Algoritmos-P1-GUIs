@@ -1,6 +1,6 @@
-package dev.esteban.misc;
+package dev.esteban.solitarieRelated.misc;
 
-import dev.esteban.solitarie.SolitaireGame;
+import dev.esteban.solitarieRelated.solitarie.SolitaireGame;
 import java.util.Scanner;
 
 public class SolitaireTextUI {

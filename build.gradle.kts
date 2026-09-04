@@ -26,8 +26,8 @@ tasks.withType<JavaCompile> {
 }
 
 application {
-    mainModule.set("dev.esteban.main")
-    mainClass.set("dev.esteban.main.HelloApplication")
+    mainModule.set("dev.esteban.solitarieRelated.main")
+    mainClass.set("dev.esteban.solitarieRelated.main.HelloApplication")
 }
 
 javafx {

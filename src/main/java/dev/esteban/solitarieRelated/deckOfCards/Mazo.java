@@ -1,4 +1,4 @@
-package dev.esteban.deckOfCards;
+package dev.esteban.solitarieRelated.deckOfCards;
 /**
  * Write a description of class Mazo here.
  *
