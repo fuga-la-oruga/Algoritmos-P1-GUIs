@@ -20,14 +20,20 @@ public class BlackJackController
         view.getSettingsButton().setOnAction(e -> openSettings());
         view.getHitButton().setOnAction(e -> hit());
         view.getStandButton().setOnAction(e -> stand());
-        view.getHandButton().setOnAction(e -> HandDialog.show(
-                stage,
-                "Cartas del jugador " + (currentPlayerIndex + 1),
-                game.getPlayerHand(currentPlayerIndex)));
-        view.getDealerSlot().getCardsButton().setOnAction(e -> HandDialog.show(
-                stage,
-                "Cartas del Dealer",
-                game.getDealerHand()));
+
+        view.getHandButton().setOnAction(e -> HandDialog.show
+        (
+            stage,
+            "Cartas del jugador " + (currentPlayerIndex + 1),
+            game.getPlayerHand(currentPlayerIndex)
+        ));
+
+        view.getDealerSlot().getCardsButton().setOnAction(e -> HandDialog.show
+        (
+            stage,
+            "Cartas del Dealer",
+            game.getDealerHand()
+        ));
 
         stage.setOnCloseRequest(e ->
         {
@@ -97,13 +103,24 @@ public class BlackJackController
 
     private void finishRound()
     {
-        while (!game.isDealerFinished())
+        if (game.shouldDealerPlay())
         {
-            dealerPlayOneStep();
+            while (!game.isDealerFinished())
+            {
+                dealerPlayOneStep();
+            }
         }
+
         game.revealDealerHand();
         refreshView();
-        ResultsDialog.show(stage, game, () -> startNewRound(game.getNumberOfPlayers()), this::confirmExit);
+
+        ResultsDialog.show
+        (
+            stage,
+            game,
+            () -> startNewRound(game.getNumberOfPlayers()),
+            this::confirmExit
+        );
     }
 
     private int findNextUnfinishedPlayer(int fromIndex)

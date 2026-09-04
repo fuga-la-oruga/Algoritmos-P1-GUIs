@@ -143,6 +143,18 @@ public class BlackJackGame
         hand.addCard(card);
     }
 
+    public boolean shouldDealerPlay()
+    {
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            if (!playerHands.get(i).isBusted())
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public int getNumberOfPlayers()
     {
         return numberOfPlayers;
