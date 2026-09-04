@@ -43,14 +43,16 @@ public class ResultsDialog
         playAgainButton.setOnAction(e ->
         {
             stage.close();
-            onPlayAgain.run();
+
+            javafx.application.Platform.runLater(onPlayAgain);
         });
 
         Button exitButton = new Button("Salir");
         exitButton.setOnAction(e ->
         {
             stage.close();
-            onExit.run();
+
+            javafx.application.Platform.runLater(onExit);
         });
 
         HBox buttonsRow = new HBox(10, playAgainButton, exitButton);

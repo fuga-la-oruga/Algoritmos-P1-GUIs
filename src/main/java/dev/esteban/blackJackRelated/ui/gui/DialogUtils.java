@@ -12,9 +12,8 @@ public class DialogUtils
     {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.initOwner(owner);
-        alert.setResizable(false);
         alert.setTitle("Aviso");
-        alert.setHeaderText(null);
+        alert.setHeaderText("Aviso");
         alert.setContentText(message);
         alert.showAndWait();
     }
@@ -23,11 +22,12 @@ public class DialogUtils
     {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.initOwner(owner);
-        alert.setResizable(false);
         alert.setTitle("Confirmar");
-        alert.setHeaderText(null);
+        alert.setHeaderText("Confirmación");
         alert.setContentText(message);
+
         Optional<ButtonType> result = alert.showAndWait();
+
         return result.isPresent() && result.get() == ButtonType.OK;
     }
 }

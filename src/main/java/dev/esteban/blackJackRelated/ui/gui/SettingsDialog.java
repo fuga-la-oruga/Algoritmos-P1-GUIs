@@ -40,9 +40,11 @@ public class SettingsDialog
             playerButton.setOnAction(e ->
             {
                 stage.close();
+
                 if (playerCount != currentPlayers)
                 {
-                    onChangePlayers.accept(playerCount);
+                    javafx.application.Platform.runLater(() ->
+                            onChangePlayers.accept(playerCount));
                 }
             });
             playersRow.getChildren().add(playerButton);
@@ -52,14 +54,16 @@ public class SettingsDialog
         restartButton.setOnAction(e ->
         {
             stage.close();
-            onRestart.run();
+
+            javafx.application.Platform.runLater(onRestart);
         });
 
         Button exitButton = new Button("Salir");
         exitButton.setOnAction(e ->
         {
             stage.close();
-            onExit.run();
+
+            javafx.application.Platform.runLater(onExit);
         });
 
         VBox root = new VBox(15, titleLabel, playersLabel, playersRow, restartButton, exitButton);
