@@ -29,14 +29,17 @@ public class SettingsDialog
         Label playersLabel = new Label("Jugadores");
         HBox playersRow = new HBox(10);
         playersRow.setAlignment(Pos.CENTER);
-        for (int i = 1; i <= 4; i++)
+
+        for (int i = 1; i <= 4; i ++)
         {
             int playerCount = i;
             Button playerButton = new Button(String.valueOf(i));
+
             if (i == currentPlayers)
             {
                 playerButton.setStyle("-fx-base: lightgray;");
             }
+
             playerButton.setOnAction(e ->
             {
                 stage.close();
@@ -47,10 +50,12 @@ public class SettingsDialog
                             onChangePlayers.accept(playerCount));
                 }
             });
+
             playersRow.getChildren().add(playerButton);
         }
 
         Button restartButton = new Button("Reiniciar");
+
         restartButton.setOnAction(e ->
         {
             stage.close();
@@ -59,6 +64,7 @@ public class SettingsDialog
         });
 
         Button exitButton = new Button("Salir");
+
         exitButton.setOnAction(e ->
         {
             stage.close();

@@ -43,7 +43,6 @@ public class ResultsDialog
         playAgainButton.setOnAction(e ->
         {
             stage.close();
-
             javafx.application.Platform.runLater(onPlayAgain);
         });
 
@@ -51,7 +50,6 @@ public class ResultsDialog
         exitButton.setOnAction(e ->
         {
             stage.close();
-
             javafx.application.Platform.runLater(onExit);
         });
 

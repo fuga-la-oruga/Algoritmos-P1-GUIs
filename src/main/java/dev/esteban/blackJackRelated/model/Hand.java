@@ -21,19 +21,23 @@ public class Hand
     {
         int total = 0;
         int aces = 0;
+
         for (CartaInglesa card : cards)
         {
             total += getCardValue(card);
+
             if (card.getValor() == 14)
             {
                 aces ++;
             }
         }
+
         while (total > 21 && aces > 0)
         {
             total -= 10;
             aces --;
         }
+
         return total;
     }
 
@@ -50,24 +54,29 @@ public class Hand
     private int getCardValue(CartaInglesa card)
     {
         int value = card.getValor();
+
         if (value == 14)
         {
             return 11;
         }
+
         if (value >= 11 && value <= 13)
         {
             return 10;
         }
+
         return value;
     }
 
     public String toString()
     {
         StringBuilder sb = new StringBuilder();
+
         for (CartaInglesa card : cards)
         {
             sb.append(card.toString()).append(" ");
         }
+
         return sb.toString().trim();
     }
 }

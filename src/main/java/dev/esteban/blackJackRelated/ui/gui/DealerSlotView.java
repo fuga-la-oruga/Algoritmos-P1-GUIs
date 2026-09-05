@@ -9,7 +9,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
-
 import java.util.List;
 
 public class DealerSlotView extends VBox
@@ -25,7 +24,6 @@ public class DealerSlotView extends VBox
 
         Region leftSpacer = new Region();
         leftSpacer.prefWidthProperty().bind(cardsButton.widthProperty());
-        leftSpacer.minWidthProperty().bind(cardsButton.widthProperty());
 
         HBox cardRow = new HBox(10, leftSpacer, cardSlot, cardsButton);
         cardRow.setAlignment(Pos.CENTER);

@@ -24,18 +24,18 @@ public class BlackJackGame
         dealerHand = new Hand();
         dealerStood = false;
 
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i ++)
         {
             playerHands.add(new Hand());
             playerStood.add(false);
         }
 
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i ++)
         {
             dealCard(playerHands.get(i), true);
         }
         dealCard(dealerHand, false);
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i ++)
         {
             dealCard(playerHands.get(i), true);
         }
@@ -63,7 +63,7 @@ public class BlackJackGame
 
     public boolean allPlayersFinished()
     {
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i ++)
         {
             if (!isPlayerFinished(i))
             {
@@ -112,40 +112,48 @@ public class BlackJackGame
     public GameResult determineResult(int playerIndex)
     {
         Hand playerHand = playerHands.get(playerIndex);
+
         if (playerHand.isBusted())
         {
             return GameResult.DEALER_WINS;
         }
+
         if (dealerHand.isBusted())
         {
             return GameResult.PLAYER_WINS;
         }
+
         int playerTotal = playerHand.getTotalValue();
         int dealerTotal = dealerHand.getTotalValue();
+
         if (playerTotal > dealerTotal)
         {
             return GameResult.PLAYER_WINS;
         }
+
         if (dealerTotal > playerTotal)
         {
             return GameResult.DEALER_WINS;
         }
+
         return GameResult.TIE;
     }
 
     private void dealCard(Hand hand, boolean visible)
     {
         CartaInglesa card = deck.obtenerUnaCarta();
+
         if (visible)
         {
             card.makeFaceUp();
         }
+
         hand.addCard(card);
     }
 
     public boolean shouldDealerPlay()
     {
-        for (int i = 0; i < numberOfPlayers; i++)
+        for (int i = 0; i < numberOfPlayers; i ++)
         {
             if (!playerHands.get(i).isBusted())
             {

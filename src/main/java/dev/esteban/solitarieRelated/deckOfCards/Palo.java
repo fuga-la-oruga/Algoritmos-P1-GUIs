@@ -1,11 +1,7 @@
 package dev.esteban.solitarieRelated.deckOfCards;
-/**
- * Palos de cartas de una baraja inglesa.
- *
- * @author (Cecilia Curlango Rosas)
- * @version (2025-1)
- */
-public enum Palo {
+
+public enum Palo
+{
     TREBOL(1,"♣","negro"),
     DIAMANTE(2,"♦","rojo"),
     CORAZON(3,"♥","rojo"),
@@ -15,18 +11,24 @@ public enum Palo {
     private final String figura;
     private final String color;
 
-    Palo(int peso, String figura, String color) {
+    Palo(int peso, String figura, String color)
+    {
         this.peso = peso;
         this.figura = figura;
         this.color = color;
     }
-    public int getPeso() {
+    public int getPeso()
+    {
         return peso;
     }
-    public String getFigura() {
+
+    public String getFigura()
+    {
         return figura;
     }
-    public String getColor() {
+
+    public String getColor()
+    {
         return color;
     }
 }

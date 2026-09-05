@@ -67,12 +67,14 @@ public class BlackJackController
     private void advanceTurn()
     {
         int next = findNextUnfinishedPlayer(currentPlayerIndex + 1);
+
         if (next != -1)
         {
             currentPlayerIndex = next;
             refreshView();
             return;
         }
+
         if (!game.allPlayersFinished())
         {
             dealerPlayOneStep();
@@ -91,6 +93,7 @@ public class BlackJackController
     {
         boolean tookCard = game.dealerAutoPlay();
         refreshView();
+
         if (tookCard)
         {
             DialogUtils.showNotice(stage, "El Dealer ha recogido una carta");
@@ -119,13 +122,13 @@ public class BlackJackController
             stage,
             game,
             () -> startNewRound(game.getNumberOfPlayers()),
-            this::confirmExit
+            () -> confirmExit()
         );
     }
 
     private int findNextUnfinishedPlayer(int fromIndex)
     {
-        for (int i = fromIndex; i < game.getNumberOfPlayers(); i++)
+        for (int i = fromIndex; i < game.getNumberOfPlayers(); i ++)
         {
             if (!game.isPlayerFinished(i))
             {
@@ -137,19 +140,24 @@ public class BlackJackController
 
     private void openSettings()
     {
-        SettingsDialog.show(
-                stage,
-                game.getNumberOfPlayers(),
-                this::confirmChangePlayers,
-                this::confirmRestart,
-                this::confirmExit);
+        SettingsDialog.show
+        (
+            stage,
+            game.getNumberOfPlayers(),
+            this::confirmChangePlayers,
+            this::confirmRestart,
+            this::confirmExit
+        );
     }
 
     private void confirmChangePlayers(int numberOfPlayers)
     {
-        boolean confirmed = DialogUtils.showConfirmation(
-                stage,
-                "Se perdera la partida actual. Deseas iniciar una partida nueva con " + numberOfPlayers + " jugador(es)?");
+        boolean confirmed = DialogUtils.showConfirmation
+        (
+            stage,
+            "Se perdera la partida actual. Deseas iniciar una partida nueva con " + numberOfPlayers + " jugador(es)?"
+        );
+
         if (confirmed)
         {
             startNewRound(numberOfPlayers);
@@ -159,6 +167,7 @@ public class BlackJackController
     private void confirmRestart()
     {
         boolean confirmed = DialogUtils.showConfirmation(stage, "Deseas reiniciar la partida actual?");
+
         if (confirmed)
         {
             startNewRound(game.getNumberOfPlayers());
@@ -168,6 +177,7 @@ public class BlackJackController
     private void confirmExit()
     {
         boolean confirmed = DialogUtils.showConfirmation(stage, "Deseas salir del juego?");
+
         if (confirmed)
         {
             Platform.exit();
@@ -177,10 +187,12 @@ public class BlackJackController
     private void refreshView()
     {
         view.getDealerSlot().update(game.getDealerHand());
-        for (int i = 0; i < game.getNumberOfPlayers(); i++)
+
+        for (int i = 0; i < game.getNumberOfPlayers(); i ++)
         {
             boolean active = (i == currentPlayerIndex);
             String status = "";
+
             if (game.getPlayerHand(i).isBusted())
             {
                 status = "Pasado";
@@ -189,8 +201,10 @@ public class BlackJackController
             {
                 status = "Plantado";
             }
+
             view.getPlayerSlot(i).update(game.getPlayerHand(i), i + 1, active, status);
         }
+
         boolean roundActive = currentPlayerIndex != -1;
         view.getHitButton().setDisable(!roundActive);
         view.getStandButton().setDisable(!roundActive);
