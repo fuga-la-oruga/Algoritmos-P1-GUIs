@@ -56,12 +56,12 @@ public class Hand
     {
         int value = card.getValor();
 
-        if (value == 14)
+        if (value == 13)
         {
             return 11;
         }
 
-        if (value >= 11 && value <= 13)
+        if (value >= 10 && value <= 12)
         {
             return 10;
         }

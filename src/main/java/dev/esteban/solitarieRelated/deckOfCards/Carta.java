@@ -14,7 +14,7 @@ public abstract class Carta implements Comparable<Carta>
         this.palo = palo;
         this.color = color;
 
-        if (valor == 14)
+        if (valor == 13)
         {
             valorBajo = 1;
         }
@@ -50,12 +50,11 @@ public abstract class Carta implements Comparable<Carta>
 
         return switch (valor)
         {
-            case 14 -> "A" + palo.getFigura();
-            case 11 -> "J"+ palo.getFigura();
-            case 12 -> "Q" + palo.getFigura();
-            case 13 -> "K" + palo.getFigura();
-            case 15-> "Joker";
-            default -> ""+ valor + palo.getFigura();
+            case 10 -> "J" + palo.getFigura();
+            case 11 -> "Q" + palo.getFigura();
+            case 12 -> "K" + palo.getFigura();
+            case 13 -> "A" + palo.getFigura();
+            default -> "" + valor + palo.getFigura();
         };
     }
 
@@ -76,7 +75,7 @@ public abstract class Carta implements Comparable<Carta>
             return true;
         }
 
-        if (valor == 14 && carta.valor == 2)
+        if (valor == 13 && carta.valor == 2)
         {
             return true;
         }
