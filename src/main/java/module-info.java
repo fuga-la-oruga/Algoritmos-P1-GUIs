@@ -1,4 +1,5 @@
-module dev.esteban.solitarieRelated.main {
+module dev.esteban.solitarieRelated.main
+{
     requires javafx.controls;
     requires javafx.fxml;
 
