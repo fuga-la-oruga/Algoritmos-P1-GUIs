@@ -1,44 +1,45 @@
 package dev.esteban.blackJackRelated.model;
 
 import dev.esteban.solitarieRelated.deckOfCards.CartaInglesa;
-import java.util.ArrayList;
 
 public class Hand
 {
-    private final ArrayList<CartaInglesa> cards = new ArrayList<>();
+    private final Stack<CartaInglesa> cards = new Stack<>(21);
+    private int totalValue = 0;
+    private int aces = 0;
+    private CartaInglesa firstCard;
 
     public void addCard(CartaInglesa card)
     {
-        cards.add(card);
+        cards.push(card);
+        int cardValue = getCardValue(card);
+        totalValue += cardValue;
+
+        if(cardValue == 11)
+        {
+            aces ++;
+        }
+
+        while (totalValue > 21 && aces > 0)
+        {
+            totalValue -= 10;
+            aces--;
+        }
+
+        if(cards.getSize() == 1)
+        {
+            firstCard = card;
+        }
     }
 
-    public ArrayList<CartaInglesa> getCards()
+    public Stack<CartaInglesa> getCards()
     {
         return cards;
     }
 
     public int getTotalValue()
     {
-        int total = 0;
-        int aces = 0;
-
-        for (CartaInglesa card : cards)
-        {
-            total += getCardValue(card);
-
-            if (card.getValor() == 14)
-            {
-                aces ++;
-            }
-        }
-
-        while (total > 21 && aces > 0)
-        {
-            total -= 10;
-            aces --;
-        }
-
-        return total;
+        return totalValue;
     }
 
     public boolean isBusted()
@@ -48,7 +49,7 @@ public class Hand
 
     public boolean isBlackJack()
     {
-        return cards.size() == 2 && getTotalValue() == 21;
+        return cards.getSize() == 2 && getTotalValue() == 21;
     }
 
     private int getCardValue(CartaInglesa card)
@@ -68,15 +69,18 @@ public class Hand
         return value;
     }
 
-    public String toString()
+    public int getNumberOfCards()
     {
-        StringBuilder sb = new StringBuilder();
+        return cards.getSize();
+    }
 
-        for (CartaInglesa card : cards)
-        {
-            sb.append(card.toString()).append(" ");
-        }
+    public CartaInglesa getLastCard()
+    {
+        return cards.peek();
+    }
 
-        return sb.toString().trim();
+    public CartaInglesa getFirstCard()
+    {
+        return firstCard;
     }
 }
