@@ -4,11 +4,13 @@ public class Stack<T>
 {
     private T[] stack;
     private int top_i;
+    private int size;
 
-    public Stack(int size)
+    public Stack(int capacity)
     {
-        stack = (T[]) new Object[size];
+        stack = (T[]) new Object[capacity];
         top_i = -1;
+        size = 0;
     }
 
     public void push(T item)
@@ -19,6 +21,7 @@ public class Stack<T>
         }
 
         top_i ++;
+        size ++;
         stack[top_i] = item;
     }
 
@@ -33,6 +36,7 @@ public class Stack<T>
         T temp = stack[top_i];
         stack[top_i] = null;
         top_i --;
+        size --;
         return temp;
     }
 
@@ -55,5 +59,10 @@ public class Stack<T>
             return true;
         }
         return false;
+    }
+
+    public int getSize()
+    {
+        return size;
     }
 }
