@@ -15,7 +15,7 @@ public class BlackJackApp extends Application
         new BlackJackController(game, view, stage);
 
         Scene scene = new Scene(view, 900, 600);
-        stage.setTitle("Black Jack");
+        stage.setTitle("Grand Theft Auto VI");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
