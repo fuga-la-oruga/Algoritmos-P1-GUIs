@@ -1,6 +1,9 @@
 package dev.esteban.blackJackRelated.ui.gui;
 
 import dev.esteban.blackJackRelated.model.BlackJackGame;
+import dev.esteban.blackJackRelated.model.Move;
+import dev.esteban.blackJackRelated.model.Stack;
+import dev.esteban.solitarieRelated.deckOfCards.CartaInglesa;
 import javafx.application.Platform;
 import javafx.stage.Stage;
 
@@ -10,6 +13,7 @@ public class BlackJackController
     private final GameView view;
     private final Stage stage;
     private int currentPlayerIndex;
+    private final Stack<Move> undoStack = new Stack<>(100);
 
     public BlackJackController(BlackJackGame game, GameView view, Stage stage)
     {
@@ -20,6 +24,7 @@ public class BlackJackController
         view.getSettingsButton().setOnAction(e -> openSettings());
         view.getHitButton().setOnAction(e -> hit());
         view.getStandButton().setOnAction(e -> stand());
+        view.getUndoButton().setOnAction(e -> undo());
 
         view.getHandButton().setOnAction(e -> HandDialog.show
         (
@@ -48,6 +53,7 @@ public class BlackJackController
 
     private void startNewRound(int numberOfPlayers)
     {
+        clearUndoStack();
         game.startGame(numberOfPlayers);
         currentPlayerIndex = findNextUnfinishedPlayer(0);
         view.showPlayers(numberOfPlayers);
@@ -56,14 +62,45 @@ public class BlackJackController
 
     private void hit()
     {
+        int previousPlayerIndex = currentPlayerIndex;
+        game.clearDealerCardsThisTurn();
         game.playerHit(currentPlayerIndex);
         advanceTurn();
+
+        Move movement = new Move
+        (
+            previousPlayerIndex,
+            Move.HIT,
+            game.getPlayerHand(previousPlayerIndex).getLastCard(),
+            previousPlayerIndex
+        );
+
+        Stack<CartaInglesa> dealerCards = game.getDealerCardsThisTurn();
+
+        while (!dealerCards.isEmpty())
+        {
+            movement.getDealerCards().push(dealerCards.pop());
+        }
+
+        undoStack.push(movement);
     }
 
     private void stand()
     {
+        int previousPlayerIndex = currentPlayerIndex;
+
         game.playerStand(currentPlayerIndex);
         advanceTurn();
+
+        Move movement = new Move
+        (
+            previousPlayerIndex,
+            Move.STAND,
+            null,
+            previousPlayerIndex
+        );
+
+        undoStack.push(movement);
     }
 
     private void advanceTurn()
@@ -211,5 +248,38 @@ public class BlackJackController
         view.getHitButton().setDisable(!roundActive);
         view.getStandButton().setDisable(!roundActive);
         view.getHandButton().setDisable(!roundActive);
+    }
+
+    private void clearUndoStack()
+    {
+        while (!undoStack.isEmpty())
+        {
+            undoStack.pop();
+        }
+    }
+
+    private void undo()
+    {
+        if (undoStack.isEmpty())
+        {
+            return;
+        }
+
+        Move movement = undoStack.pop();
+
+        game.undoDealerMove(movement.getDealerCards());
+
+        if (movement.getType().equals(Move.HIT))
+        {
+            game.undoHit(movement.getPlayer_i());
+        }
+        else if (movement.getType().equals(Move.STAND))
+        {
+            game.undoStand(movement.getPlayer_i());
+        }
+
+        currentPlayerIndex = movement.getPreviousPlayerIndex();
+
+        refreshView();
     }
 }

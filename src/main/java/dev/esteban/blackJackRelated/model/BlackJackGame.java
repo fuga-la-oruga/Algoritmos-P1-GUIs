@@ -9,11 +9,12 @@ import java.util.List;
 public class BlackJackGame
 {
     private Mazo deck;
-    private List<Hand> playerHands;
-    private List<Boolean> playerStood;
+    private ArrayList<Hand> playerHands;
+    private ArrayList<Boolean> playerStood;
     private Hand dealerHand;
     private boolean dealerStood;
     private int numberOfPlayers;
+    private Stack<CartaInglesa> dealerCardsThisTurn;
 
     public void startGame(int numberOfPlayers)
     {
@@ -23,6 +24,7 @@ public class BlackJackGame
         playerStood = new ArrayList<>();
         dealerHand = new Hand();
         dealerStood = false;
+        dealerCardsThisTurn = new Stack<>(21);
 
         for (int i = 0; i < numberOfPlayers; i ++)
         {
@@ -79,11 +81,17 @@ public class BlackJackGame
         {
             return false;
         }
+
         if (dealerHand.getTotalValue() <= 16)
         {
-            dealCard(dealerHand, true);
+            CartaInglesa card = deck.obtenerUnaCarta();
+            card.makeFaceUp();
+            dealerHand.addCard(card);
+            dealerCardsThisTurn.push(card);
+
             return true;
         }
+
         dealerStood = true;
         return false;
     }
@@ -181,5 +189,48 @@ public class BlackJackGame
     public Hand getDealerHand()
     {
         return dealerHand;
+    }
+
+    public CartaInglesa undoHit(int playerIndex)
+    {
+        CartaInglesa card = playerHands.get(playerIndex).removeLastCard();
+
+        if (card != null)
+        {
+            deck.devolverCarta(card);
+        }
+
+        return card;
+    }
+
+    public void undoStand(int playerIndex)
+    {
+        playerStood.set(playerIndex, false);
+    }
+
+    public void undoDealerMove(Stack<CartaInglesa> dealerCards)
+    {
+        while (!dealerCards.isEmpty())
+        {
+            CartaInglesa card = dealerCards.pop();
+
+            dealerHand.removeLastCard();
+            deck.devolverCarta(card);
+        }
+
+        dealerStood = false;
+    }
+
+    public Stack<CartaInglesa> getDealerCardsThisTurn()
+    {
+        return dealerCardsThisTurn;
+    }
+
+    public void clearDealerCardsThisTurn()
+    {
+        while (!dealerCardsThisTurn.isEmpty())
+        {
+            dealerCardsThisTurn.pop();
+        }
     }
 }

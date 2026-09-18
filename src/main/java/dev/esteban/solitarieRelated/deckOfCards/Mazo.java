@@ -55,4 +55,9 @@ public class Mazo
     {
         return cartas.toString();
     }
+
+    public void devolverCarta(CartaInglesa carta)
+    {
+        cartas.add(0, carta);
+    }
 }

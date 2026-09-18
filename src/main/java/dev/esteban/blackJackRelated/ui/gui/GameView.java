@@ -3,9 +3,7 @@ package dev.esteban.blackJackRelated.ui.gui;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,13 +18,20 @@ public class GameView extends BorderPane
     private final Button handButton = new Button("Cartas");
     private final Button hitButton = new Button("Pedir");
     private final Button standButton = new Button("Plantarse");
+    private final Button undoButton = new Button("Deshacer");
 
     public GameView()
     {
         setPadding(new Insets(20));
 
-        HBox topBar = new HBox(settingsButton);
+        HBox topBar = new HBox();
         topBar.setAlignment(Pos.CENTER_LEFT);
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        topBar.getChildren().addAll(settingsButton, spacer, undoButton);
+
         setTop(topBar);
 
         for (int i = 0; i < 4; i++)
@@ -83,5 +88,10 @@ public class GameView extends BorderPane
     public Button getStandButton()
     {
         return standButton;
+    }
+
+    public Button getUndoButton()
+    {
+        return undoButton;
     }
 }

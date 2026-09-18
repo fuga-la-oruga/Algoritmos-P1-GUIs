@@ -83,4 +83,71 @@ public class Hand
     {
         return firstCard;
     }
+
+    public CartaInglesa removeLastCard()
+    {
+        if (cards.isEmpty())
+        {
+            return null;
+        }
+
+        Stack<CartaInglesa> auxiliary = new Stack<>(21);
+        CartaInglesa removedCard = cards.pop();
+
+        totalValue = 0;
+        aces = 0;
+
+        while (!cards.isEmpty())
+        {
+            CartaInglesa card = cards.pop();
+            auxiliary.push(card);
+        }
+
+        while (!auxiliary.isEmpty())
+        {
+            CartaInglesa card = auxiliary.pop();
+            cards.push(card);
+
+            int cardValue = getCardValue(card);
+            totalValue += cardValue;
+
+            if (cardValue == 11)
+            {
+                aces ++;
+            }
+
+            while (totalValue > 21 && aces > 0)
+            {
+                totalValue -= 10;
+                aces --;
+            }
+        }
+
+        return removedCard;
+    }
+
+    public Stack<CartaInglesa> getLastCards(int amount)
+    {
+        Stack<CartaInglesa> result = new Stack<>(21);
+        Stack<CartaInglesa> auxiliary = new Stack<>(21);
+
+        for (int i = 0; i < amount; i++)
+        {
+            if (cards.isEmpty())
+            {
+                break;
+            }
+
+            CartaInglesa card = cards.pop();
+            auxiliary.push(card);
+            result.push(card);
+        }
+
+        while (!auxiliary.isEmpty())
+        {
+            cards.push(auxiliary.pop());
+        }
+
+        return result;
+    }
 }
