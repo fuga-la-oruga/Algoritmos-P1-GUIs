@@ -1,6 +1,7 @@
 package dev.esteban.blackJackRelated.ui.gui;
 
 import dev.esteban.blackJackRelated.model.Hand;
+import dev.esteban.blackJackRelated.model.Stack;
 import dev.esteban.solitarieRelated.deckOfCards.CartaInglesa;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -27,7 +28,23 @@ public class HandDialog
 
         HBox cardsRow = new HBox(15);
         cardsRow.setAlignment(Pos.CENTER);
-        boolean allFaceUp = true;
+
+        Stack<CartaInglesa> auxiliary = new Stack<>(21);
+
+        while (!hand.getCards().isEmpty())
+        {
+            CartaInglesa card = hand.getCards().pop();
+            auxiliary.push(card);
+        }
+
+        while (!auxiliary.isEmpty())
+        {
+            CartaInglesa card = auxiliary.pop();
+
+            cardsRow.getChildren().add(new CardView(card));
+
+            hand.getCards().push(card);
+        }
 
         String totalText = dealer ? "Total: ?" : "Total: " + hand.getTotalValue();
         Label totalLabel = new Label(totalText);
