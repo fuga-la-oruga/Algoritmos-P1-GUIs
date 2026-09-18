@@ -25,14 +25,16 @@ public class BlackJackController
         (
             stage,
             "Cartas del jugador " + (currentPlayerIndex + 1),
-            game.getPlayerHand(currentPlayerIndex)
+            game.getPlayerHand(currentPlayerIndex),
+            false
         ));
 
         view.getDealerSlot().getCardsButton().setOnAction(e -> HandDialog.show
         (
             stage,
             "Cartas del Dealer",
-            game.getDealerHand()
+            game.getDealerHand(),
+            true
         ));
 
         stage.setOnCloseRequest(e ->

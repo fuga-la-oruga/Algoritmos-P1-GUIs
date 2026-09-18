@@ -105,7 +105,7 @@ public class BlackJackGame
     {
         if (!dealerHand.getCards().isEmpty())
         {
-            dealerHand.getCards().get(0).makeFaceUp();
+            dealerHand.getFirstCard().makeFaceUp();
         }
     }
 

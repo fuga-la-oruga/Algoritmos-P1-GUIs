@@ -14,7 +14,7 @@ import javafx.stage.Window;
 
 public class HandDialog
 {
-    public static void show(Window owner, String title, Hand hand)
+    public static void show(Window owner, String title, Hand hand, boolean dealer)
     {
         Stage stage = new Stage();
         stage.initOwner(owner);
@@ -28,16 +28,8 @@ public class HandDialog
         HBox cardsRow = new HBox(15);
         cardsRow.setAlignment(Pos.CENTER);
         boolean allFaceUp = true;
-        for (CartaInglesa card : hand.getCards())
-        {
-            cardsRow.getChildren().add(new CardView(card));
-            if (!card.isFaceup())
-            {
-                allFaceUp = false;
-            }
-        }
 
-        String totalText = allFaceUp ? "Total: " + hand.getTotalValue() : "Total: ?";
+        String totalText = dealer ? "Total: ?" : "Total: " + hand.getTotalValue();
         Label totalLabel = new Label(totalText);
 
         VBox root = new VBox(20, titleLabel, cardsRow, totalLabel);

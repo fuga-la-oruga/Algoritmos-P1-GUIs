@@ -14,7 +14,8 @@ public abstract class Carta implements Comparable<Carta>
         this.palo = palo;
         this.color = color;
 
-        if (valor == 14) {
+        if (valor == 14)
+        {
             valorBajo = 1;
         }
         else

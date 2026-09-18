@@ -1,6 +1,7 @@
 package dev.esteban.blackJackRelated.ui.gui;
 
 import dev.esteban.blackJackRelated.model.Hand;
+import dev.esteban.blackJackRelated.model.Stack;
 import dev.esteban.solitarieRelated.deckOfCards.CartaInglesa;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -26,7 +27,7 @@ public class PlayerSlotView extends VBox
     public void update(Hand hand, int playerNumber, boolean active, String statusText)
     {
         statusLabel.setText(statusText);
-        nameLabel.setText("Jugador " + playerNumber + " (x" + hand.getCards().size() + ")");
+        nameLabel.setText("Jugador " + playerNumber + " (x" + hand.getNumberOfCards() + ")");
         if (active)
         {
             nameLabel.setStyle("-fx-font-weight: bold; -fx-font-style: italic;");
@@ -37,10 +38,10 @@ public class PlayerSlotView extends VBox
         }
 
         cardSlot.getChildren().clear();
-        List<CartaInglesa> cards = hand.getCards();
+        Stack<CartaInglesa> cards = hand.getCards();
         if (!cards.isEmpty())
         {
-            CartaInglesa lastCard = cards.get(cards.size() - 1);
+            CartaInglesa lastCard = cards.peek();
             cardSlot.getChildren().add(new CardView(lastCard));
         }
     }
