@@ -13,7 +13,7 @@ public class GameView extends BorderPane
     private final Button settingsButton = new Button("Ajustes");
     private final DealerSlotView dealerSlot = new DealerSlotView();
     private final HBox playersRow = new HBox(40);
-    private final List<PlayerSlotView> playerSlots = new ArrayList<>();
+    private final ArrayList<PlayerSlotView> playerSlots = new ArrayList<>();
 
     private final Button handButton = new Button("Cartas");
     private final Button hitButton = new Button("Pedir");

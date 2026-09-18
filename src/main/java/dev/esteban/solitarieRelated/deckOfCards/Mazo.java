@@ -58,6 +58,6 @@ public class Mazo
 
     public void devolverCarta(CartaInglesa carta)
     {
-        cartas.add(0, carta);
+        cartas.add(carta);
     }
 }

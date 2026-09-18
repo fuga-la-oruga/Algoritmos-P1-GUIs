@@ -279,7 +279,6 @@ public class BlackJackController
         }
 
         currentPlayerIndex = movement.getPreviousPlayerIndex();
-
         refreshView();
     }
 }

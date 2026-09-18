@@ -23,7 +23,7 @@ public class Hand
         while (totalValue > 21 && aces > 0)
         {
             totalValue -= 10;
-            aces--;
+            aces --;
         }
 
         if(cards.getSize() == 1)
